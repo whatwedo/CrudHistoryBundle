@@ -1,4 +1,4 @@
-whatwedo_crud_history:
+whatwedo_crud_auditor:
     resource: .
-    type: whatwedo_crud_history
+    type: whatwedo_crud_auditor
 

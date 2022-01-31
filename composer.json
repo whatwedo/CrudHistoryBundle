@@ -1,7 +1,7 @@
 {
-    "name": "whatwedo/auditorcrud-extension-bundle",
+    "name": "whatwedo/crud-history-bundle",
     "type": "symfony-bundle",
-    "description": "Extend whatwedo crud bundle for with auditor",
+    "description": "Extends whatwedo crud bundle with history view from auditor-bundle",
     "license": "MIT",
     "minimum-stability": "dev",
     "authors": [
@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "whatwedo\\AuditorCrudExtensionBundle\\": ""
+            "whatwedo\\CrudHistoryBundle\\": ""
         }
     },
     "repositories": [

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace whatwedo\AuditorCrudExtensionBundle\Model;
+namespace whatwedo\CrudHistoryBundle\Model;
 
 use DH\Auditor\Model\Entry;
 

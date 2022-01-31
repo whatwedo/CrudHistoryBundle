@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace whatwedo\AuditorCrudExtensionBundle\DependencyInjection;
+namespace whatwedo\CrudHistoryBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  *
  * @see http://symfony.com/doc/current/cookbook/bundles/extension.html
  */
-class whatwedoAuditorCrudExtensionExtension extends Extension
+class whatwedoCrudHistoryExtension extends Extension
 {
     /**
      * @param string[] $configs

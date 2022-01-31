@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace whatwedo\AuditorCrudExtensionBundle\Definition;
+namespace whatwedo\CrudHistoryBundle\Definition;
 
 class HistoryAsscoiatedClass
 {

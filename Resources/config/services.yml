@@ -4,16 +4,16 @@ services:
         autoconfigure: true
         public: false
 
-    whatwedo\AuditorCrudExtensionBundle\Manager\:
+    whatwedo\CrudHistoryBundle\Manager\:
         resource: '../../Manager/*'
 
-    whatwedo\AuditorCrudExtensionBundle\Controller\:
+    whatwedo\CrudHistoryBundle\Controller\:
         resource: '../../Controller/*'
 
-    whatwedo\AuditorCrudExtensionBundle\Routing\:
+    whatwedo\CrudHistoryBundle\Routing\:
         resource: '../../Routing/*'
 
 
-    whatwedo\AuditorCrudExtensionBundle\Routing\CrudHistoryLoader:
+    whatwedo\CrudHistoryBundle\Routing\CrudHistoryLoader:
         tags:
             - { name: routing.loader }

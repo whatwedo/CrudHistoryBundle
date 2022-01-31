@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace whatwedo\AuditorCrudExtensionBundle\Controller;
+namespace whatwedo\CrudHistoryBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use whatwedo\AuditorCrudExtensionBundle\Manager\HistoryManager;
+use whatwedo\CrudHistoryBundle\Manager\HistoryManager;
 use whatwedo\CrudBundle\Controller\CrudController;
 use whatwedo\CrudBundle\Enum\Page;
 use whatwedo\CrudBundle\Manager\DefinitionManager;

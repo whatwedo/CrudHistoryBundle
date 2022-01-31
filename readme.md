@@ -2,8 +2,8 @@
 
 config/routes.yaml
 ```yaml
-whatwedo_crud_history_bundle:
-    resource: "@whatwedoAuditorCrudExtensionBundle/Resources/config/routing.yml"
+whatwedo_crud_auditor_bundle:
+    resource: "@whatwedoCrudHistoryBundle/Resources/config/routing.yml"
     prefix: /
 
 ```
@@ -17,8 +17,8 @@ namespace App\Definition\History;
 use App\Entity\Email;
 use App\Entity\Person;
 use App\Entity\Phone;
-use whatwedo\AuditorCrudExtensionBundle\Definition\HistoryAsscoiatedClass;
-use whatwedo\AuditorCrudExtensionBundle\Definition\HistoryDefinitionInterface;
+use whatwedo\CrudHistoryBundle\Definition\HistoryAsscoiatedClass;
+use whatwedo\CrudHistoryBundle\Definition\HistoryDefinitionInterface;
 
 class PersonHistoryDefinition implements HistoryDefinitionInterface
 {

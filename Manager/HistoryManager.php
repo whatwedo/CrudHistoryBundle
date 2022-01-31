@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace whatwedo\AuditorCrudExtensionBundle\Manager;
+namespace whatwedo\CrudHistoryBundle\Manager;
 
 use DH\Auditor\Model\Entry;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Filter\SimpleFilter;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Query;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use whatwedo\AuditorCrudExtensionBundle\Definition\HistoryDefinitionInterface;
-use whatwedo\AuditorCrudExtensionBundle\Model\HistoryItem;
-use whatwedo\AuditorCrudExtensionBundle\Definition\BaseHistoryDefinition;
+use whatwedo\CrudHistoryBundle\Definition\HistoryDefinitionInterface;
+use whatwedo\CrudHistoryBundle\Model\HistoryItem;
+use whatwedo\CrudHistoryBundle\Definition\BaseHistoryDefinition;
 use whatwedo\CrudBundle\Definition\DefinitionInterface;
 
 class HistoryManager
