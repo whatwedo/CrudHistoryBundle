@@ -1,0 +1,4 @@
+whatwedo_crud_history:
+    resource: .
+    type: whatwedo_crud_history
+

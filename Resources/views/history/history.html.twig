@@ -1,0 +1,121 @@
+{# @var entry \DH\Auditor\Model\Entry #}
+
+{% block content_footer_wrapper '' %}
+
+{% block main %}
+
+    {% if historyEntities|length > 0 %}
+        <div class="accordion accordion-flush pull-right"
+             id="accordionFlushExample">
+            {% for transactionEntry in historyEntities %}
+                {% for historyItem in transactionEntry %}
+                    {% set entry = historyItem.entry %}
+                    {% if loop.first %}
+                        <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-heading{{ historyItem.date|date('YmdHis') }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapse{{ historyItem.date|date('YmdHis') }}"
+                                    aria-expanded="false"
+                                    aria-controls="flush-collapse{{ historyItem.date|date('YmdHis') }}">
+                                {{ historyItem.date|date('Y-m-d H:i:s') }} {{ 'history.by'|trans }} {{ entry.username }}
+                            </button>
+                        </h2>
+                        <div id="flush-collapse{{ historyItem.date|date('YmdHis') }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ historyItem.date|date('YmdHis') }}" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                        <ul>
+
+                    {% endif %}
+
+
+                    {% if entry.type == 'insert' %}
+                        {{ _self.insert(historyItem) }}
+                    {% elseif entry.type == 'update' %}
+                        {{ _self.update(historyItem) }}
+                    {% elseif entry.type == 'remove' %}
+                        {{ _self.remove(historyItem) }}
+                    {% elseif entry.type == 'associate' %}
+                        {{ _self.associate(historyItem) }}
+                    {% elseif entry.type == 'dissociate' %}
+                        {{ _self.dissociate(historyItem) }}
+                    {% endif %}
+
+                    {% if loop.last %}
+                        </ul>
+                        </div>
+                        </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+            {% endfor %}
+
+            <div class="list-pagination">
+{#                {{ knp_pagination_render(historyEntities) }}#}
+            </div>
+
+        </div>
+
+    {% else %}
+        {{ 'history.no_items'|trans }}
+    {% endif %}
+{% endblock %}
+
+{% macro insert(historyItem) %}
+    <li>
+        <b> {{ historyItem.class }} {{ historyItem.entry.type }}</b><br>
+        <ul>
+            {% for field, diff in historyItem.entry.diffs %}
+                <li>{{ (historyItem.transalationBaseKey ~ '.' ~ field)|trans }}: {{ _self.value(diff.new) }}</li>
+            {% endfor %}
+        </ul>
+    </li>
+{% endmacro %}
+
+{% macro update(historyItem) %}
+    <li>
+        <b> {{ historyItem.class }} {{ historyItem.entry.type }}</b><br>
+        <ul>
+            {% for field, diff in historyItem.entry.diffs %}
+                <li>{{ (historyItem.transalationBaseKey ~ '.' ~ field)|trans }} {{ 'history.changed'|trans  }} {{ 'history.from'|trans }} {{ _self.value(diff.old) }}
+                    {{ 'history.to'|trans }} {{ _self.value(diff.new) }}
+                </li>
+            {% endfor %}
+        </ul>
+    </li>
+{% endmacro %}
+
+{% macro remove(historyItem) %}
+    <li>
+        <b> {{ historyItem.class }} {{ historyItem.entry.type }}</b>
+        {{ _self.target(historyItem.entry.diffs, historyItem.transalationBaseKey) }}
+        <br>
+    </li>
+{% endmacro %}
+
+{% macro associate(historyItem) %}
+    <li>
+        {{ _self.target(historyItem.entry.diffs.target, historyItem.transalationBaseKey) }} {{ 'history.assigned'|trans }}
+    </li>
+{% endmacro %}
+
+{% macro dissociate(historyItem) %}
+    {% if historyItem.entry.diffs.target %}
+        <li>
+            {{ _self.target(historyItem.entry.diffs.target, historyItem.transalationBaseKey) }} {{ 'history.deleted'|trans }}
+        </li>
+    {% endif %}
+{% endmacro %}
+
+
+{% macro value(value) %}
+    {% if value.label is defined %}
+        {{ value.label }}
+    {% else %}
+        {{ value }}
+    {% endif %}
+{% endmacro %}
+
+{% macro target(target, transalationBaseKey) %}
+    {{ (transalationBaseKey ~ '.' ~ target.table)|trans }}: {{ target.label }}
+{% endmacro %}
+

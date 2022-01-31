@@ -1,0 +1,53 @@
+{# default Sliding pagination control implementation #}
+<div class="list-pagination-counter">
+    <strong>{{ totalCount }}</strong> Ergebnisse
+</div>
+
+
+{% if pageCount > 1 %}
+    <nav class="pager list-pagination-paginator">
+    <ul class="pagination">
+
+        {% if previous is defined %}
+            <li class="page-item">
+                <a class="page-link" {{ stimulus_action('pagination', 'paginateContent')}} data-pagination-page-param="{{ previous }}" href="#">
+                    <i class="fa fa-angle-left mx-1"></i> <span class="btn-label">Zurück</span>
+                </a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#">
+                    <i class="fa fa-angle-left mx-1"></i> <span class="btn-label">Zurück</span>
+                </a>
+            </li>
+        {% endif %}
+
+        {% for page in pagesInRange %}
+            {% if page != current %}
+        <li class="page-item">
+                    <a class="page-link" {{ stimulus_action('pagination', 'paginateContent')}} data-pagination-page-param="{{ page }}" href="#">{{ page }}</a>
+                </li>
+            {% else %}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="#">{{ page }}</a>
+                </li>
+
+            {% endif %}
+        {% endfor %}
+
+        {% if next is defined %}
+            <li class="page-item">
+                <a class="page-link" {{ stimulus_action('pagination', 'paginateContent')}} data-pagination-page-param="{{ next }}" href="#">
+                    <span class="btn-label">Nächste</span> <i class="fa fa-angle-right mx-1"></i>
+                </a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#">
+                    <span class="btn-label">Nächste</span> <i class="fa fa-angle-right mx-1"></i>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}

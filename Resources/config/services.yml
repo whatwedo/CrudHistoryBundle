@@ -1,0 +1,19 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    whatwedo\AuditorCrudExtensionBundle\Manager\:
+        resource: '../../Manager/*'
+
+    whatwedo\AuditorCrudExtensionBundle\Controller\:
+        resource: '../../Controller/*'
+
+    whatwedo\AuditorCrudExtensionBundle\Routing\:
+        resource: '../../Routing/*'
+
+
+    whatwedo\AuditorCrudExtensionBundle\Routing\CrudHistoryLoader:
+        tags:
+            - { name: routing.loader }
