@@ -4,26 +4,12 @@ declare(strict_types=1);
 
 namespace whatwedo\CrudHistoryBundle\Tests\App;
 
-use DH\AuditorBundle\DHAuditorBundle;
-use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
-use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
-use Symfony\Bundle\SecurityBundle\SecurityBundle;
-use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
-use whatwedo\CoreBundle\Manager\FormatterManager;
-use whatwedo\CoreBundle\whatwedoCoreBundle;
-use whatwedo\CrudHistoryBundle\Manager\FilterManager;
-use whatwedo\CrudHistoryBundle\Manager\HistoryManager;
-use whatwedo\CrudHistoryBundle\Manager\SearchManager;
-use whatwedo\CrudHistoryBundle\Tests\App\Repository\CompanyRepository;
-use whatwedo\CrudHistoryBundle\Tests\App\Repository\ContactRepository;
-use whatwedo\CrudHistoryBundle\whatwedoCrudHistoryBundle;
-use Zenstruck\Foundry\ZenstruckFoundryBundle;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 class Kernel extends BaseKernel
 {

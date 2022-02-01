@@ -6,11 +6,10 @@ namespace whatwedo\CrudHistoryBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use whatwedo\CrudHistoryBundle\Manager\HistoryManager;
 use whatwedo\CrudBundle\Controller\CrudController;
 use whatwedo\CrudBundle\Enum\Page;
 use whatwedo\CrudBundle\Manager\DefinitionManager;
+use whatwedo\CrudHistoryBundle\Manager\HistoryManager;
 
 class HistoryCrudController extends CrudController
 {
@@ -19,7 +18,7 @@ class HistoryCrudController extends CrudController
         $entity = $this->getEntityOr404($request);
         $this->denyAccessUnlessGrantedCrud(Page::SHOW, $entity);
 
-        $definition =  $definitionManager->getDefinitionByEntity($entity);
+        $definition = $definitionManager->getDefinitionByEntity($entity);
         $historyDefinition = $definition->getHistoryDefinition();
         $def = new $historyDefinition();
         $historyCollection = $historyManager->getHistory($entity, $definition);

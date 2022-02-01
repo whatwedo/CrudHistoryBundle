@@ -9,10 +9,10 @@ use DH\Auditor\Provider\Doctrine\Persistence\Reader\Filter\SimpleFilter;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Query;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use whatwedo\CrudBundle\Definition\DefinitionInterface;
+use whatwedo\CrudHistoryBundle\Definition\BaseHistoryDefinition;
 use whatwedo\CrudHistoryBundle\Definition\HistoryDefinitionInterface;
 use whatwedo\CrudHistoryBundle\Model\HistoryItem;
-use whatwedo\CrudHistoryBundle\Definition\BaseHistoryDefinition;
-use whatwedo\CrudBundle\Definition\DefinitionInterface;
 
 class HistoryManager
 {

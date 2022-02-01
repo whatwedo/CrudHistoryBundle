@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace whatwedo\CrudHistoryBundle\Tests\Helper;
+namespace whatwedo\CrudHistoryBundle\Tests\App\Helper;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\Container\ContainerInterface;

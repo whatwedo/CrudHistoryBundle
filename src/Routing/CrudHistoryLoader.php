@@ -7,9 +7,8 @@ namespace whatwedo\CrudHistoryBundle\Routing;
 use Symfony\Component\Config\Loader\Loader;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
-use whatwedo\CrudHistoryBundle\Controller\HistoryCrudController;
-use whatwedo\CrudBundle\Enum\Page;
 use whatwedo\CrudBundle\Manager\DefinitionManager;
+use whatwedo\CrudHistoryBundle\Controller\HistoryCrudController;
 
 class CrudHistoryLoader extends Loader
 {
@@ -17,8 +16,7 @@ class CrudHistoryLoader extends Loader
 
     public function __construct(
         protected DefinitionManager $definitionManager
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -59,6 +57,6 @@ class CrudHistoryLoader extends Loader
      */
     public function supports($resource, $type = null)
     {
-        return 'whatwedo_crud_history' === $type;
+        return $type === 'whatwedo_crud_history';
     }
 }

@@ -22,7 +22,8 @@
     "require-dev": {
         "symfony/phpunit-bridge": "^v6.0",
         "zenstruck/foundry": "1.x-dev",
-        "symfony/yaml": "^v6.0"
+        "symfony/yaml": "^v6.0",
+        "whatwedo/php-coding-standard": "dev-develop"
     },
     "autoload": {
         "psr-4": {
