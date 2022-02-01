@@ -1,0 +1,9 @@
+# Configuration reference available at:
+# https://github.com/DamienHarper/DoctrineAuditBundle#configuration
+dh_auditor:
+  providers:
+    doctrine:
+      entities:
+        whatwedo\CrudHistoryBundle\Tests\App\Entity\Company: ~
+        whatwedo\CrudHistoryBundle\Tests\App\Entity\Contact: ~
+        whatwedo\CrudHistoryBundle\Tests\App\Entity\Person: ~
