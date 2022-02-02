@@ -30,8 +30,13 @@ return [
     whatwedo\CrudBundle\whatwedoCrudBundle::class => [
         'all' => true,
     ],
-    whatwedo
-\CrudHistoryBundle\whatwedoCrudHistoryBundle::class => [
-    'all' => true,
-],
+    whatwedo\SearchBundle\whatwedoSearchBundle::class => [
+        'all' => true,
+    ],
+    whatwedo\TableBundle\whatwedoTableBundle::class => [
+        'all' => true,
+    ],
+    whatwedo\CrudHistoryBundle\whatwedoCrudHistoryBundle::class => [
+        'all' => true,
+    ],
 ];

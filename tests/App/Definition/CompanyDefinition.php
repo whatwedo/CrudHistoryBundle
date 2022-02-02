@@ -2,12 +2,16 @@
 
 declare(strict_types=1);
 
+namespace whatwedo\CrudHistoryBundle\Tests\App\Definition;
+
 use whatwedo\CrudBundle\Builder\DefinitionBuilder;
 use whatwedo\CrudBundle\Definition\AbstractDefinition;
+use whatwedo\CrudHistoryBundle\CrudDefinition\HistoryInterface;
+use whatwedo\CrudHistoryBundle\Tests\App\Definition\History\CompanyHistoryDefinition;
 use whatwedo\CrudHistoryBundle\Tests\App\Entity\Company;
 use whatwedo\TableBundle\Table\Table;
 
-class CompanyDefinition extends AbstractDefinition
+class CompanyDefinition extends AbstractDefinition implements HistoryInterface
 {
     public static function getEntity(): string
     {
@@ -30,5 +34,10 @@ class CompanyDefinition extends AbstractDefinition
         $table
             ->addColumn('name')
         ;
+    }
+
+    public function getHistoryDefinition(): string
+    {
+        return CompanyHistoryDefinition::class;
     }
 }

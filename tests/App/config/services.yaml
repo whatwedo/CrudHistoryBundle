@@ -1,0 +1,16 @@
+
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    whatwedo\CrudHistoryBundle\Tests\App\Definition\CompanyDefinition:
+        tags: ['whatwedo_crud.definition']
+
+    whatwedo\CrudHistoryBundle\Tests\App\Definition\ContactDefinition:
+        tags: ['whatwedo_crud.definition']
+
+    whatwedo\CrudHistoryBundle\Tests\App\Definition\PersonDefinition:
+        tags: ['whatwedo_crud.definition']

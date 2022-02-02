@@ -9,7 +9,8 @@ use DH\Auditor\Provider\Doctrine\Persistence\Reader\Filter\SimpleFilter;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Query;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use whatwedo\CrudBundle\Definition\DefinitionInterface;
+use whatwedo\CrudBundle\Manager\DefinitionManager;
+use whatwedo\CrudHistoryBundle\CrudDefinition\HistoryInterface;
 use whatwedo\CrudHistoryBundle\Definition\BaseHistoryDefinition;
 use whatwedo\CrudHistoryBundle\Definition\HistoryDefinitionInterface;
 use whatwedo\CrudHistoryBundle\Model\HistoryItem;
@@ -20,13 +21,17 @@ class HistoryManager
 
     protected array $historyDefinitions = [];
 
+    private DefinitionManager $definitionManager;
+
     public function __construct(
-        Reader $auditReader
+        Reader $auditReader,
+        DefinitionManager $definitionManager
     ) {
         $this->auditReader = $auditReader;
+        $this->definitionManager = $definitionManager;
     }
 
-    public function getHistory($entity, DefinitionInterface $definition, int $page = 1): array
+    public function getHistory($entity, int $page = 1): array
     {
         $definition = $this->getHistoryDefinition($entity);
 
@@ -62,6 +67,18 @@ class HistoryManager
         } else {
             throw new \Exception('\App\Manager\History\HistoryDefinitionInterface for ' . $definition->getMainClass() . ' already definied');
         }
+    }
+
+    public function getHistoryDefinition($entity): HistoryDefinitionInterface
+    {
+        $definition = $this->definitionManager->getDefinitionByEntity($entity);
+        if ($definition instanceof HistoryInterface) {
+            return new ($definition->getHistoryDefinition())();
+        }
+
+        // create a basic Definition
+
+        return new BaseHistoryDefinition(get_class($entity));
     }
 
     protected function cleanHistoryItem(Entry $e, $entityFqcn): ?HistoryItem
@@ -111,17 +128,6 @@ class HistoryManager
         }
 
         return $transActionEntries;
-    }
-
-    private function getHistoryDefinition($entity): HistoryDefinitionInterface
-    {
-        if (isset($this->historyDefinitions[get_class($entity)])) {
-            return $this->historyDefinitions[get_class($entity)];
-        }
-
-        // create a basic Definition
-
-        return new BaseHistoryDefinition(get_class($entity));
     }
 
     /**

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace whatwedo\CrudHistoryBundle\Tests\App\Definition;
+
 use whatwedo\CrudBundle\Builder\DefinitionBuilder;
 use whatwedo\CrudBundle\Definition\AbstractDefinition;
 use whatwedo\CrudHistoryBundle\Tests\App\Entity\Contact;

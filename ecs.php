@@ -15,6 +15,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         __DIR__ . '/tests',
     ]);
 
+
     // run and fix, one by one
     $containerConfigurator->import('vendor/whatwedo/php-coding-standard/config/whatwedo-symfony.php');
 
@@ -24,6 +25,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         FunctionCommentThrowTagSniff::class,
         ValidClassNameSniff::class
         => [
+            __DIR__ . '/tests/App/var/*',
             __DIR__ . '/src/whatwedoCrudHistoryBundle.php',
             __DIR__ . '/src/DependencyInjection/whatwedoCrudHistoryExtension.php',
         ]

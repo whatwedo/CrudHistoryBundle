@@ -18,5 +18,5 @@ jobs:
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         env:
-          DATABASE_URL: sqlite:///%kernel.project_dir%/var/app.db
+          DATABASE_URL: sqlite:///%kernel.project_dir%/../../var/app.db
         run: vendor/bin/simple-phpunit

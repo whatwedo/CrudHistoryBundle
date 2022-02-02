@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Definition\History;
+namespace whatwedo\CrudHistoryBundle\Tests\App\Definition\History;
 
 use whatwedo\CrudHistoryBundle\Definition\HistoryAsscoiatedClass;
 use whatwedo\CrudHistoryBundle\Definition\HistoryDefinitionInterface;
