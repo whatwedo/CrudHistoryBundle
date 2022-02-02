@@ -33,14 +33,15 @@ class HistoryTest extends KernelTestCase
         $this->_resetDatabase();
         $company = CompanyFactory::createOne()->object();
 
-        $contact = ContactFactory::createOne(['company' => $company]);
-
+        $contact = ContactFactory::createOne([
+            'company' => $company,
+        ]);
 
         $historyManager = self::getContainer()->get(HistoryManager::class);
 
         $entityHistory = $historyManager->getHistory($company);
 
         $this->assertIsArray($entityHistory);
-        $this->assertCount(1, $entityHistory);
+        $this->assertCount(2, $entityHistory);
     }
 }

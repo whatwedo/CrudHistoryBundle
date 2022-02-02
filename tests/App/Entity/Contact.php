@@ -6,12 +6,13 @@ namespace whatwedo\CrudHistoryBundle\Tests\App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use whatwedo\CrudHistoryBundle\Entity\AuditParentTriggerInterface;
 
 /**
  * @ORM\Table(name="contact")
  * @ORM\Entity(repositoryClass="whatwedo\CrudHistoryBundle\Tests\App\Repository\ContactRepository")
  */
-class Contact implements \Stringable
+class Contact implements \Stringable, AuditParentTriggerInterface
 {
     /**
      * @ORM\Column(type="integer")
@@ -62,6 +63,11 @@ class Contact implements \Stringable
     public function setCompany(Company $company): void
     {
         $this->company = $company;
+    }
+
+    public function triggerParent()
+    {
+        $this->getCompany()->increaseAuditCounter();
     }
 
     public function __toString(): string

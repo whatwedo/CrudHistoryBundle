@@ -17,3 +17,8 @@ services:
     whatwedo\CrudHistoryBundle\Routing\CrudHistoryLoader:
         tags:
             - { name: routing.loader }
+
+    whatwedo\CrudHistoryBundle\EventSubscriber\AuditTriggerSubscriber:
+        tags:
+            - name: 'doctrine.event_subscriber'
+              priority: 500
