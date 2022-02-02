@@ -6,12 +6,12 @@ namespace whatwedo\CrudHistoryBundle\Tests\App\Definition;
 
 use whatwedo\CrudBundle\Builder\DefinitionBuilder;
 use whatwedo\CrudBundle\Definition\AbstractDefinition;
-use whatwedo\CrudHistoryBundle\CrudDefinition\HistoryInterface;
+use whatwedo\CrudHistoryBundle\Definition\HasHistoryDefinition;
 use whatwedo\CrudHistoryBundle\Tests\App\Definition\History\CompanyHistoryDefinition;
 use whatwedo\CrudHistoryBundle\Tests\App\Entity\Company;
 use whatwedo\TableBundle\Table\Table;
 
-class CompanyDefinition extends AbstractDefinition implements HistoryInterface
+class CompanyDefinition extends AbstractDefinition implements HasHistoryDefinition
 {
     public static function getEntity(): string
     {

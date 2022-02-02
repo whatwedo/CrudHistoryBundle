@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace whatwedo\CrudHistoryBundle\CrudDefinition;
+namespace whatwedo\CrudHistoryBundle\Definition;
 
-interface HistoryInterface
+interface HasHistoryDefinition
 {
     public function getHistoryDefinition(): string;
 }

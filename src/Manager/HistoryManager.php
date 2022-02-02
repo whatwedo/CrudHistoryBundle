@@ -10,8 +10,8 @@ use DH\Auditor\Provider\Doctrine\Persistence\Reader\Query;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use whatwedo\CrudBundle\Manager\DefinitionManager;
-use whatwedo\CrudHistoryBundle\CrudDefinition\HistoryInterface;
 use whatwedo\CrudHistoryBundle\Definition\BaseHistoryDefinition;
+use whatwedo\CrudHistoryBundle\Definition\HasHistoryDefinition;
 use whatwedo\CrudHistoryBundle\Definition\HistoryDefinitionInterface;
 use whatwedo\CrudHistoryBundle\Model\HistoryItem;
 
@@ -72,12 +72,11 @@ class HistoryManager
     public function getHistoryDefinition($entity): HistoryDefinitionInterface
     {
         $definition = $this->definitionManager->getDefinitionByEntity($entity);
-        if ($definition instanceof HistoryInterface) {
+        if ($definition instanceof HasHistoryDefinition) {
             return new ($definition->getHistoryDefinition())();
         }
 
         // create a basic Definition
-
         return new BaseHistoryDefinition(get_class($entity));
     }
 

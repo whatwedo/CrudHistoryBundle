@@ -7,8 +7,8 @@ namespace whatwedo\CrudHistoryBundle\Tests;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use whatwedo\CrudBundle\Definition\DefinitionInterface;
 use whatwedo\CrudBundle\Manager\DefinitionManager;
-use whatwedo\CrudHistoryBundle\CrudDefintion\HistoryInterface;
 use whatwedo\CrudHistoryBundle\Definition\BaseHistoryDefinition;
+use whatwedo\CrudHistoryBundle\Definition\HasHistoryDefinition;
 use whatwedo\CrudHistoryBundle\Manager\HistoryManager;
 use whatwedo\CrudHistoryBundle\Tests\App\Definition\History\CompanyHistoryDefinition;
 use whatwedo\CrudHistoryBundle\Tests\App\Factory\CompanyFactory;
@@ -31,7 +31,7 @@ class DefinitionTest extends KernelTestCase
         $definition = $definitionManager->getDefinitionByEntity($entity);
 
         $this->assertInstanceOf(DefinitionInterface::class, $definition);
-        $this->assertInstanceOf(HistoryInterface::class, $definition);
+        $this->assertInstanceOf(HasHistoryDefinition::class, $definition);
     }
 
     public function testGetHistoryDefintion()
