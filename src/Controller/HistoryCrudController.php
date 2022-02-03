@@ -21,11 +21,11 @@ class HistoryCrudController extends CrudController
         $definition = $definitionManager->getDefinitionByEntity($entity);
         $historyDefinition = $definition->getHistoryDefinition();
         $def = new $historyDefinition();
-        $historyCollection = $historyManager->getHistory($entity, $definition);
+        $historyCollection = $historyManager->getHistory($entity, 1);
 //        $pagination->setTemplate('history/sliding.html.twig');
 
         return $this->render(
-            '/history/history.html.twig',
+            '@whatwedoCrudHistory/history/history.html.twig',
             [
                 'historyEntities' => $historyCollection,
                 'entity' => $entity,

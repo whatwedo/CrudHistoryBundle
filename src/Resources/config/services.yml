@@ -4,14 +4,15 @@ services:
         autoconfigure: true
         public: false
 
-    whatwedo\CrudHistoryBundle\Manager\:
-        resource: '../../Manager/*'
+    whatwedo\CrudHistoryBundle\:
+        resource: '../../*'
+        exclude:
+            - '../../DependencyInjection/'
+            - '../../Entity/'
+            - '../../Page/'
+            - '../../Kernel.php'
 
-    whatwedo\CrudHistoryBundle\Controller\:
-        resource: '../../Controller/*'
 
-    whatwedo\CrudHistoryBundle\Routing\:
-        resource: '../../Routing/*'
 
 
     whatwedo\CrudHistoryBundle\Routing\CrudHistoryLoader:

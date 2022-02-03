@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 use whatwedo\CrudBundle\Manager\DefinitionManager;
 use whatwedo\CrudHistoryBundle\Controller\HistoryCrudController;
+use whatwedo\CrudHistoryBundle\Page\HistoryPage;
 
 class CrudHistoryLoader extends Loader
 {
@@ -30,19 +31,23 @@ class CrudHistoryLoader extends Loader
 
         foreach ($this->definitionManager->getDefinitions() as $definition) {
             foreach ($definition::getCapabilities() as $capability) {
-                if ($capability === 'history') {
+                if (in_array($capability, HistoryPage::cases(), true)) {
                     $route = new Route(
                         '/' . $definition::getRoutePathPrefix() . '/',
                         [
                             '_resource' => $resource,
-                            '_controller' => HistoryCrudController::class . '::history',
+                            '_controller' => HistoryCrudController::class . '::' . $capability->toRoute(),
                         ]
                     );
 
-                    $route->setPath($route->getPath() . '{id}/history');
-                    $route->setRequirement('id', '\d+');
+                    switch ($capability) {
+                        case HistoryPage::HISTORY:
+                            $route->setPath($route->getPath() . '{id}/history');
+                            $route->setRequirement('id', '\d+');
+                            break;
+                    }
 
-                    $routes->add($definition::getRoutePrefix() . '_history', $route);
+                    $routes->add($definition::getRoutePrefix() . '_' . $capability->toRoute(), $route);
                 }
             }
         }

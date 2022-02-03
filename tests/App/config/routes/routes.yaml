@@ -1,3 +1,8 @@
 dh_auditor:
   resource: "@DHAuditorBundle/Controller/"
   type: auditor
+
+
+whatwedo_crud_history_bundle:
+  resource: "@whatwedoCrudHistoryBundle/Resources/config/routing.yml"
+  prefix: /

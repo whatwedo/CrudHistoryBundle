@@ -6,6 +6,9 @@ services:
         autowire: true
         autoconfigure: true
 
+    whatwedo\CrudHistoryBundle\Tests\App\Repository\:
+        resource: '../Repository/*'
+
     whatwedo\CrudHistoryBundle\Tests\App\Definition\CompanyDefinition:
         tags: ['whatwedo_crud.definition']
 
