@@ -11,6 +11,7 @@ trait AuditTriggerTrait
     /**
      * @ORM\Column(type="integer")
      */
+    #[ORM\Column(type: 'integer')]
     private int $auditTrigger = 0;
 
     public function triggerAudit()
