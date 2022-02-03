@@ -13,13 +13,12 @@ use whatwedo\CrudBundle\Manager\DefinitionManager;
 use whatwedo\CrudHistoryBundle\Definition\BaseHistoryDefinition;
 use whatwedo\CrudHistoryBundle\Definition\HasHistoryDefinition;
 use whatwedo\CrudHistoryBundle\Definition\HistoryDefinitionInterface;
+use whatwedo\CrudHistoryBundle\Entity\AuditTriggerInterface;
 use whatwedo\CrudHistoryBundle\Model\HistoryItem;
 
 class HistoryManager
 {
     protected Reader $auditReader;
-
-    protected array $historyDefinitions = [];
 
     private DefinitionManager $definitionManager;
 
@@ -60,15 +59,6 @@ class HistoryManager
         return $this->orderTransactions($transActionEntries);
     }
 
-    public function addHistoryDefinition(HistoryDefinitionInterface $definition)
-    {
-        if (! isset($this->historyDefinitions[$definition->getMainClass()])) {
-            $this->historyDefinitions[$definition->getMainClass()] = $definition;
-        } else {
-            throw new \Exception('\App\Manager\History\HistoryDefinitionInterface for ' . $definition->getMainClass() . ' already definied');
-        }
-    }
-
     public function getHistoryDefinition($entity): HistoryDefinitionInterface
     {
         $definition = $this->definitionManager->getDefinitionByEntity($entity);
@@ -88,14 +78,10 @@ class HistoryManager
         ) {
             $diffs = $e->getDiffs();
 
-            unset($diffs['auditCounter']);
-            unset($diffs['updatedAt']);
-            unset($diffs['updatedBy']);
-            unset($diffs['createdAt']);
-            unset($diffs['createdBy']);
+            unset($diffs[AuditTriggerInterface::FIELD_NAME]);
             unset($diffs['id']);
 
-            $reflectionClass = new \ReflectionClass('DH\Auditor\Model\Entry');
+            $reflectionClass = new \ReflectionClass(Entry::class);
 
             $reflectionProperty = $reflectionClass->getProperty('diffs');
             $reflectionProperty->setAccessible(true);
@@ -147,8 +133,8 @@ class HistoryManager
         foreach ($entries as $entry) {
             if (! isset($transActions[$entry->getTransactionHash()])) {
                 $transActions[$entry->getTransactionHash()] = true;
-                foreach ($definition->getAssociatedClasses() as $asscoiatedClass) {
-                    $transActionEntries = $this->getItems($entry, $transActionEntries, $asscoiatedClass->entityFqcn, $asscoiatedClass->options);
+                foreach ($definition->getAssociatedClasses() as $associatedClass) {
+                    $transActionEntries = $this->getItems($entry, $transActionEntries, $associatedClass->entityFqcn, $associatedClass->filter);
                 }
             }
 

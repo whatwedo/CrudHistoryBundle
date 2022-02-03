@@ -6,13 +6,13 @@ namespace whatwedo\CrudHistoryBundle\Tests\App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use whatwedo\CrudHistoryBundle\Entity\AuditParentTriggerInterface;
+use whatwedo\CrudHistoryBundle\Entity\AuditManyToOneTriggerInterface;
 
 /**
  * @ORM\Table(name="contact")
  * @ORM\Entity(repositoryClass="whatwedo\CrudHistoryBundle\Tests\App\Repository\ContactRepository")
  */
-class Contact implements \Stringable, AuditParentTriggerInterface
+class Contact implements \Stringable, AuditManyToOneTriggerInterface
 {
     /**
      * @ORM\Column(type="integer")
@@ -65,9 +65,9 @@ class Contact implements \Stringable, AuditParentTriggerInterface
         $this->company = $company;
     }
 
-    public function triggerParent()
+    public function triggerManyToOne()
     {
-        $this->getCompany()->increaseAuditCounter();
+        $this->getCompany()->triggerAudit();
     }
 
     public function __toString(): string

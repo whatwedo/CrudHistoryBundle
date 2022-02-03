@@ -18,7 +18,6 @@ class ControllerTest extends WebTestCase
 
     public function testSomething(): void
     {
-
         // This calls KernelTestCase::bootKernel(), and creates a
         // "client" that is acting as the browser
         $client = static::createClient();
@@ -26,7 +25,6 @@ class ControllerTest extends WebTestCase
         $this->_resetDatabase();
 
         $company = CompanyFactory::createOne()->object();
-
 
         /** @var RouterInterface $router */
         $router = self::getContainer()->get(RouterInterface::class);

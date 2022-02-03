@@ -13,7 +13,7 @@ trait AuditTriggerTrait
      */
     private int $auditTrigger = 0;
 
-    public function increaseAuditCounter()
+    public function triggerAudit()
     {
         ++$this->auditTrigger;
     }

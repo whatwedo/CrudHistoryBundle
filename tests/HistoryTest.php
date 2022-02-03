@@ -31,9 +31,15 @@ class HistoryTest extends KernelTestCase
     public function testCompanyContactHistory()
     {
         $this->_resetDatabase();
-        $company = CompanyFactory::createOne()->object();
+        $company = CompanyFactory::createOne([
+            'name' => 'whatwedo GmbH',
+            'city' => 'Bern',
+            'country' => 'Switzerland',
+            'taxIdentificationNumber' => '123456789',
+        ])->object();
 
-        $contact = ContactFactory::createOne([
+        ContactFactory::createOne([
+            'name' => 'Mauri',
             'company' => $company,
         ]);
 
@@ -43,5 +49,46 @@ class HistoryTest extends KernelTestCase
 
         $this->assertIsArray($entityHistory);
         $this->assertCount(2, $entityHistory);
+
+        // last is the contact change....
+
+        $this->assertCount(1, $entityHistory[array_keys($entityHistory)[0]]);
+        $this->assertSame([
+            'company' => [
+                'new' => [
+                    'class' => 'whatwedo\CrudHistoryBundle\Tests\App\Entity\Company',
+                    'id' => 1,
+                    'label' => 'whatwedo\CrudHistoryBundle\Tests\App\Entity\Company#1',
+                    'table' => 'company',
+                ],
+                'old' => null,
+            ],
+            'name' => [
+                'new' => 'Mauri',
+                'old' => null,
+            ],
+        ], $entityHistory[array_keys($entityHistory)[0]][0]->getEntry()->getDiffs());
+
+        // company insert
+
+        $this->assertCount(1, $entityHistory[array_keys($entityHistory)[1]]);
+        $this->assertSame([
+            'city' => [
+                'new' => 'Bern',
+                'old' => null,
+            ],
+            'country' => [
+                'new' => 'Switzerland',
+                'old' => null,
+            ],
+            'name' => [
+                'new' => 'whatwedo GmbH',
+                'old' => null,
+            ],
+            'taxIdentificationNumber' => [
+                'new' => '123456789',
+                'old' => null,
+            ],
+        ], $entityHistory[array_keys($entityHistory)[1]][0]->getEntry()->getDiffs());
     }
 }

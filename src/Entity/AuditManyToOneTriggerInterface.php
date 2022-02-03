@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace whatwedo\CrudHistoryBundle\Entity;
 
-interface AuditParentTriggerInterface
+interface AuditManyToOneTriggerInterface
 {
-    public function triggerParent();
+    public function triggerManyToOne();
 }

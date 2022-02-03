@@ -11,7 +11,7 @@ interface HistoryDefinitionInterface
     public function getChildDefinitions(): array;
 
     /**
-     * @return HistoryAsscoiatedClass[]
+     * @return HistoryAssociatedClass[]
      */
     public function getAssociatedClasses(): array;
 }

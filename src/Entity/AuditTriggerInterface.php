@@ -6,5 +6,7 @@ namespace whatwedo\CrudHistoryBundle\Entity;
 
 interface AuditTriggerInterface
 {
-    public function increaseAuditCounter();
+    public const FIELD_NAME = 'auditTrigger';
+
+    public function triggerAudit();
 }

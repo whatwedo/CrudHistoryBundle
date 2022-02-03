@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace whatwedo\CrudHistoryBundle\Definition;
 
-class HistoryAsscoiatedClass
+class HistoryAssociatedClass
 {
     public string $entityFqcn;
 
-    public array $options = [];
+    public array $filter = [];
 
-    public function __construct(string $entityFqcn, array $options)
+    public function __construct(string $entityFqcn, array $filter)
     {
         $this->entityFqcn = $entityFqcn;
-        $this->options = $options;
+        $this->filter = $filter;
     }
 }

@@ -18,11 +18,7 @@ class HistoryCrudController extends CrudController
         $entity = $this->getEntityOr404($request);
         $this->denyAccessUnlessGrantedCrud(Page::SHOW, $entity);
 
-        $definition = $definitionManager->getDefinitionByEntity($entity);
-        $historyDefinition = $definition->getHistoryDefinition();
-        $def = new $historyDefinition();
         $historyCollection = $historyManager->getHistory($entity, 1);
-//        $pagination->setTemplate('history/sliding.html.twig');
 
         return $this->render(
             '@whatwedoCrudHistory/history/history.html.twig',

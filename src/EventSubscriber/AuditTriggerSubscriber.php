@@ -32,12 +32,10 @@ namespace whatwedo\CrudHistoryBundle\EventSubscriber;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
-use whatwedo\CrudHistoryBundle\Entity\AuditParentTriggerInterface;
+use whatwedo\CrudHistoryBundle\Entity\AuditManyToOneTriggerInterface;
 
 final class AuditTriggerSubscriber implements EventSubscriberInterface
 {
-    // this method can only return the event names; you cannot define a
-    // custom method name to execute when each event triggers
     public function getSubscribedEvents(): array
     {
         return [
@@ -48,21 +46,21 @@ final class AuditTriggerSubscriber implements EventSubscriberInterface
 
     public function preUpdate($entity): void
     {
-        $this->triggerParent($entity);
+        $this->triggerManyToOneAssciations($entity);
     }
 
     public function prePersist($entity): void
     {
-        $this->triggerParent($entity);
+        $this->triggerManyToOneAssciations($entity);
     }
 
     /**
      * @param $eventArgs
      */
-    private function triggerParent(LifecycleEventArgs $eventArgs): void
+    private function triggerManyToOneAssciations(LifecycleEventArgs $eventArgs): void
     {
-        if ($eventArgs->getEntity() instanceof AuditParentTriggerInterface) {
-            $eventArgs->getEntity()->triggerParent();
+        if ($eventArgs->getEntity() instanceof AuditManyToOneTriggerInterface) {
+            $eventArgs->getEntity()->triggerManyToOne();
         }
     }
 }
