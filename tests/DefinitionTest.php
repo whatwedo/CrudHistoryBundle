@@ -13,8 +13,8 @@ use whatwedo\CrudHistoryBundle\Manager\HistoryManager;
 use whatwedo\CrudHistoryBundle\Tests\App\Definition\History\CompanyHistoryDefinition;
 use whatwedo\CrudHistoryBundle\Tests\App\Factory\CompanyFactory;
 use whatwedo\CrudHistoryBundle\Tests\App\Factory\PersonFactory;
-use whatwedo\CrudHistoryBundle\Tests\App\Helper\ResetDatabase;
 use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 class DefinitionTest extends KernelTestCase
 {
@@ -23,8 +23,6 @@ class DefinitionTest extends KernelTestCase
 
     public function testHistoryDefinition()
     {
-        $this->_resetDatabase();
-
         $entity = CompanyFactory::createOne()->object();
 
         $definitionManager = self::getContainer()->get(DefinitionManager::class);
@@ -36,7 +34,6 @@ class DefinitionTest extends KernelTestCase
 
     public function testGetHistoryDefintion()
     {
-        $this->_resetDatabase();
         $entity = CompanyFactory::createOne()->object();
 
         $historyManager = self::getContainer()->get(HistoryManager::class);
@@ -47,7 +44,6 @@ class DefinitionTest extends KernelTestCase
 
     public function testGetBaseDefinition()
     {
-        $this->_resetDatabase();
         $entity = PersonFactory::createOne()->object();
 
         $historyManager = self::getContainer()->get(HistoryManager::class);

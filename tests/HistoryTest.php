@@ -8,8 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use whatwedo\CrudHistoryBundle\Manager\HistoryManager;
 use whatwedo\CrudHistoryBundle\Tests\App\Factory\CompanyFactory;
 use whatwedo\CrudHistoryBundle\Tests\App\Factory\ContactFactory;
-use whatwedo\CrudHistoryBundle\Tests\App\Helper\ResetDatabase;
 use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 class HistoryTest extends KernelTestCase
 {
@@ -18,7 +18,6 @@ class HistoryTest extends KernelTestCase
 
     public function testCompanyHistory()
     {
-        $this->_resetDatabase();
         $entity = CompanyFactory::createOne()->object();
         $historyManager = self::getContainer()->get(HistoryManager::class);
 
@@ -30,7 +29,6 @@ class HistoryTest extends KernelTestCase
 
     public function testCompanyContactHistory()
     {
-        $this->_resetDatabase();
         $company = CompanyFactory::createOne([
             'name' => 'whatwedo GmbH',
             'city' => 'Bern',
