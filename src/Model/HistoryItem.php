@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace whatwedo\CrudHistoryBundle\Model;
 
 use DH\Auditor\Model\Entry;
+use Doctrine\Common\Util\ClassUtils;
 
 class HistoryItem
 {
@@ -14,10 +15,10 @@ class HistoryItem
 
     private \DateTimeImmutable $date;
 
-    public function __construct(Entry $entry, string $class)
+    public function __construct(Entry $entry, string $entityFqcn)
     {
         $this->entry = $entry;
-        $this->class = str_replace('Proxies\\__CG__\\', '', $class);
+        $this->class = ClassUtils::getRealClass($entityFqcn);;
         $this->date = new \DateTimeImmutable($entry->getCreatedAt());
     }
 

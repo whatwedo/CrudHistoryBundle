@@ -18,12 +18,12 @@ class HistoryCrudController extends CrudController
         $entity = $this->getEntityOr404($request);
         $this->denyAccessUnlessGrantedCrud(Page::SHOW, $entity);
 
-        $historyCollection = $historyManager->getHistory($entity, 1);
+        $transactionList = $historyManager->getHistory($entity, 1);
 
         return $this->render(
             '@whatwedoCrudHistory/history/history.html.twig',
             [
-                'historyEntities' => $historyCollection,
+                'transactionList' => $transactionList,
                 'entity' => $entity,
             ]
         );

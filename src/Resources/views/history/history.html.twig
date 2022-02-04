@@ -1,83 +1,107 @@
 {# @var entry \DH\Auditor\Model\Entry #}
 
-{% block content_footer_wrapper '' %}
-
 {% block main %}
+    {% if transactionList|length > 0 %}
+        <div class="bg-white shadow overflow-hidden sm:rounded-md">
+            <ul role="list" class="divide-y divide-gray-200">
+                {% for transaction in transactionList %}
+                    <li>
+                        {% set firstHistoryItem = transaction|first %}
+                        {% set entry = firstHistoryItem.entry %}
+                        <div class="block hover:bg-gray-50">
+                            <div class="flex items-center px-4 py-4 sm:px-6">
+                                <div class="min-w-0 flex-1 flex items-center">
 
-    {% if historyEntities|length > 0 %}
-        <div class="accordion accordion-flush pull-right"
-             id="accordionFlushExample">
-            {% for transactionEntry in historyEntities %}
-                {% for historyItem in transactionEntry %}
-                    {% set entry = historyItem.entry %}
-                    {% if loop.first %}
-                        <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-heading{{ historyItem.date|date('YmdHis') }}">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapse{{ historyItem.date|date('YmdHis') }}"
-                                    aria-expanded="false"
-                                    aria-controls="flush-collapse{{ historyItem.date|date('YmdHis') }}">
-                                {{ historyItem.date|date('Y-m-d H:i:s') }} {{ 'history.by'|trans }} {{ entry.username }}
-                            </button>
-                        </h2>
-                        <div id="flush-collapse{{ historyItem.date|date('YmdHis') }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ historyItem.date|date('YmdHis') }}" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">
-                        <ul>
+                                    <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+                                        <div>
+                                            <p class="text-sm font-medium text-indigo-600 truncate">
+                                                {{ entry.username }}
+                                                <span class="text-sm text-gray-900">
+                                                    <time datetime="{{ firstHistoryItem.date|date('Y-m-d H:i:s') }}">{{ firstHistoryItem.date|format_datetime('short', 'short') }}</time>
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <div class="hidden md:block">
+                                            <div>
+                                                <p class="mt-2 flex items-center text-sm text-gray-500">
+                                                    {% for audit in transaction %}
+                                                        {% if audit.entry.type == 'insert' %}
+                                                            {{ bootstrap_icon('arrow-down-circle') }}
+                                                        {% elseif audit.entry.type == 'update' %}
+                                                            {{ bootstrap_icon('arrow-up-circle') }}
+                                                        {% elseif audit.entry.type == 'remove' %}
+                                                            {{ bootstrap_icon('x-circle-fill') }}
+                                                        {% elseif audit.entry.type == 'associate' %}
+                                                            {{ bootstrap_icon('plus-circle') }}
+                                                        {% elseif audit.entry.type == 'dissociate' %}
+                                                            {{ bootstrap_icon('dash-circle-fill') }}
+                                                        {% endif %}
+                                                        &nbsp; {{ ('wwd.'~audit.class|wwd_crud_entity_alias~'.title')|trans }} {{ ('whatwedo_crud_history.type.'~audit.entry.type)|trans }}
+                                                    {% endfor %}
 
-                    {% endif %}
-
-
-                    {% if entry.type == 'insert' %}
-                        {{ _self.insert(historyItem) }}
-                    {% elseif entry.type == 'update' %}
-                        {{ _self.update(historyItem) }}
-                    {% elseif entry.type == 'remove' %}
-                        {{ _self.remove(historyItem) }}
-                    {% elseif entry.type == 'associate' %}
-                        {{ _self.associate(historyItem) }}
-                    {% elseif entry.type == 'dissociate' %}
-                        {{ _self.dissociate(historyItem) }}
-                    {% endif %}
-
-                    {% if loop.last %}
-                        </ul>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="hidden md:block">
+                                            <div>
+                                                <p class="mt-2 flex items-center text-sm text-gray-500">
+                                                <ul>
+                                                    {% for audit in transaction %}
+                                                        {% if audit.entry.type == 'insert' %}
+                                                            {{ _self.insert(audit) }}
+                                                        {% elseif audit.entry.type == 'update' %}
+                                                            {{ _self.update(audit) }}
+                                                        {% elseif audit.entry.type == 'remove' %}
+                                                            {{ _self.remove(audit) }}
+                                                        {% elseif audit.entry.type == 'associate' %}
+                                                            {{ _self.associate(audit) }}
+                                                        {% elseif audit.entry.type == 'dissociate' %}
+                                                            {{ _self.dissociate(audit) }}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </ul>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    >
+                                </div>
+                            </div>
                         </div>
-                        </div>
-                        </div>
-                    {% endif %}
+                    </li>
                 {% endfor %}
 
-            {% endfor %}
-
-            <div class="list-pagination">
-{#                {{ knp_pagination_render(historyEntities) }}#}
-            </div>
-
+            </ul>
         </div>
-
     {% else %}
         {{ 'history.no_items'|trans }}
     {% endif %}
+
 {% endblock %}
 
-{% macro insert(historyItem) %}
+{% macro insert(audit) %}
     <li>
-        <b> {{ historyItem.class }} {{ historyItem.entry.type }}</b><br>
+        <b> {{ ('wwd.'~audit.class|wwd_crud_entity_alias~'.title')|trans }} {{ ('whatwedo_crud_history.type.'~audit.entry.type)|trans }}</b><br>
         <ul>
-            {% for field, diff in historyItem.entry.diffs %}
-                <li>{{ (historyItem.transalationBaseKey ~ '.' ~ field)|trans }}: {{ _self.value(diff.new) }}</li>
+            {% for property, diff in audit.entry.diffs %}
+                <li>
+                    {{ ('wwd.'~audit.class|wwd_crud_entity_alias~'.property.'~property)|trans }}
+                    : {{ _self.value(diff.new) }}
+                </li>
             {% endfor %}
         </ul>
     </li>
 {% endmacro %}
 
-{% macro update(historyItem) %}
+{% macro update(audit) %}
     <li>
-        <b> {{ historyItem.class }} {{ historyItem.entry.type }}</b><br>
+        <b> {{ ('wwd.'~audit.class|wwd_crud_entity_alias~'.title')|trans }} {{ ('whatwedo_crud_history.type.'~audit.entry.type)|trans }}</b><br>
         <ul>
-            {% for field, diff in historyItem.entry.diffs %}
-                <li>{{ (historyItem.transalationBaseKey ~ '.' ~ field)|trans }} {{ 'history.changed'|trans  }} {{ 'history.from'|trans }} {{ _self.value(diff.old) }}
-                    {{ 'history.to'|trans }} {{ _self.value(diff.new) }}
+            {% for property, diff in audit.entry.diffs %}
+                <li>
+                    {{ ('wwd.'~audit.class|wwd_crud_entity_alias~'.property.'~property)|trans }} {{ 'whatwedo_crud_history.changed'|trans({'%old%': _self.value_old(diff.old), '%new%': _self.value(diff.new)})|raw }}
                 </li>
             {% endfor %}
         </ul>
@@ -109,10 +133,20 @@
 
 {% macro value(value) %}
     {% if value.label is defined %}
-        {{ value.label }}
+        {{ value.label|trans }}
     {% else %}
-        {{ value }}
+        {{ value|trans }}
     {% endif %}
+{% endmacro %}
+
+{% macro value_old(value) %}
+    <span class="line-through">
+    {% if value.label is defined %}
+        {{ value.label|trans }}
+    {% else %}
+        {{ value|trans }}
+    {% endif %}
+        </span>
 {% endmacro %}
 
 {% macro target(target, transalationBaseKey) %}
