@@ -18,7 +18,7 @@ class HistoryItem
     public function __construct(Entry $entry, string $entityFqcn)
     {
         $this->entry = $entry;
-        $this->class = ClassUtils::getRealClass($entityFqcn);;
+        $this->class = ClassUtils::getRealClass($entityFqcn);
         $this->date = new \DateTimeImmutable($entry->getCreatedAt());
     }
 

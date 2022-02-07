@@ -30,17 +30,24 @@ declare(strict_types=1);
 namespace whatwedo\CrudHistoryBundle\EventSubscriber;
 
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use whatwedo\CrudHistoryBundle\Entity\AuditManyToOneTriggerInterface;
 
 final class AuditTriggerSubscriber implements EventSubscriberInterface
 {
+    public function __construct(
+        protected EntityManagerInterface $entityManager
+    ) {
+    }
+
     public function getSubscribedEvents(): array
     {
         return [
             Events::prePersist,
             Events::preUpdate,
+            Events::postFlush,
         ];
     }
 
@@ -52,6 +59,11 @@ final class AuditTriggerSubscriber implements EventSubscriberInterface
     public function prePersist($entity): void
     {
         $this->triggerManyToOneAssciations($entity);
+    }
+
+    public function postFlush($entity): void
+    {
+        return;
     }
 
     /**
