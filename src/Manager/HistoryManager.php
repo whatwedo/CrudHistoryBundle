@@ -8,6 +8,7 @@ use DH\Auditor\Model\Entry;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Filter\SimpleFilter;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Query;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
+use Doctrine\Common\Util\ClassUtils;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use whatwedo\CrudBundle\Manager\DefinitionManager;
 use whatwedo\CrudHistoryBundle\Definition\BaseHistoryDefinition;
@@ -34,8 +35,8 @@ class HistoryManager
     {
         $definition = $this->getHistoryDefinition($entity);
 
-        if (get_class($entity) !== $definition->getMainClass()) {
-            throw new \Exception(get_class($entity) . ' not suitable for ' . static::class);
+        if (ClassUtils::getClass($entity) !== $definition->getMainClass()) {
+            throw new \Exception(ClassUtils::getClass($entity) . ' not suitable for ' . static::class);
         }
 
         if (! $this->auditReader->getProvider()->isAuditable($entity)) {
@@ -67,7 +68,7 @@ class HistoryManager
         }
 
         // create a basic Definition
-        return new BaseHistoryDefinition(get_class($entity));
+        return new BaseHistoryDefinition(ClassUtils::getClass($entity));
     }
 
     protected function cleanHistoryItem(Entry $e, $entityFqcn): ?HistoryItem
