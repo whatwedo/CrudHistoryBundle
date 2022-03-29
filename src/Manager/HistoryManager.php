@@ -143,7 +143,7 @@ class HistoryManager
             if ($item) {
                 $transActionEntries[$entry->getTransactionHash()][] = $item;
             }
-            if (count($transActionEntries[$entry->getTransactionHash()]) === 0) {
+            if (isset($transActionEntries[$entry->getTransactionHash()]) && count($transActionEntries[$entry->getTransactionHash()]) === 0) {
                 unset($transActionEntries[$entry->getTransactionHash()]);
             }
         }

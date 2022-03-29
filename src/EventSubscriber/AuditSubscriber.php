@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace whatwedo\CrudHistoryBundle\EventSubscriber;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use whatwedo\CrudBundle\Event\CrudEvent;
 use whatwedo\CrudHistoryBundle\Entity\AuditManyToOneTriggerInterface;
@@ -11,6 +12,7 @@ use whatwedo\CrudHistoryBundle\Entity\AuditManyToOneTriggerInterface;
 class AuditSubscriber implements EventSubscriberInterface
 {
     public function __construct(
+        protected EntityManagerInterface $entityManager
     ) {
     }
 
@@ -18,6 +20,8 @@ class AuditSubscriber implements EventSubscriberInterface
     {
         return [
             CrudEvent::PRE_EDIT_PREFIX => [
+                ['triggerManyToOneAssciations', 10], ],
+            CrudEvent::PRE_DELETE_PREFIX => [
                 ['triggerManyToOneAssciations', 10], ],
         ];
     }
