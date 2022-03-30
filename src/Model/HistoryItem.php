@@ -36,9 +36,4 @@ class HistoryItem
     {
         return $this->date;
     }
-
-    public function getTransalationBaseKey(): string
-    {
-        return lcfirst(substr(strrchr($this->class, '\\'), 1));
-    }
 }

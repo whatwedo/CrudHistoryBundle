@@ -108,24 +108,26 @@
     </li>
 {% endmacro %}
 
-{% macro remove(historyItem) %}
+{% macro remove(audit) %}
     <li>
-        <b> {{ historyItem.class }} {{ historyItem.entry.type }}</b>
-        {{ _self.target(historyItem.entry.diffs, historyItem.transalationBaseKey) }}
+        <b>{{ ('wwd.'~audit.class|wwd_crud_entity_alias~'.title')|trans }}
+            {{ ('whatwedo_crud_history.type.'~audit.entry.type)|trans }}
+        </b>
+        {{ _self.target(audit.entry.diffs) }}
         <br>
     </li>
 {% endmacro %}
 
-{% macro associate(historyItem) %}
+{% macro associate(audit) %}
     <li>
-        {{ _self.target(historyItem.entry.diffs.target, historyItem.transalationBaseKey) }} {{ 'history.assigned'|trans }}
+        {{ _self.target(audit.entry.diffs.target) }} {{ 'whatwedo_crud_history.assigned'|trans }}
     </li>
 {% endmacro %}
 
-{% macro dissociate(historyItem) %}
-    {% if historyItem.entry.diffs.target %}
+{% macro dissociate(audit) %}
+    {% if audit.entry.diffs.target %}
         <li>
-            {{ _self.target(historyItem.entry.diffs.target, historyItem.transalationBaseKey) }} {{ 'history.deleted'|trans }}
+            {{ _self.target(audit.entry.diffs.target) }} {{ 'whatwedo_crud_history.deleted'|trans }}
         </li>
     {% endif %}
 {% endmacro %}
@@ -149,7 +151,7 @@
         </span>
 {% endmacro %}
 
-{% macro target(target, transalationBaseKey) %}
-    {{ (transalationBaseKey ~ '.' ~ target.table)|trans }}: {{ target.label }}
+{% macro target(target) %}
+    {{ ('wwd.'~target.class|wwd_crud_entity_alias~'.title')|trans }}: {{ target.label }}
 {% endmacro %}
 

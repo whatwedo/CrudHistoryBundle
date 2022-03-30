@@ -4,3 +4,5 @@ whatwedo_crud_history.type.remove: gelöscht
 whatwedo_crud_history.type.associate: assoziiert
 whatwedo_crud_history.type.dissociate: dissoziiert
 whatwedo_crud_history.changed: geändert von %old% zu %new%
+whatwedo_crud_history.assigned: zugewiesen
+whatwedo_crud_history.deleted: gelöscht
