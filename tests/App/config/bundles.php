@@ -39,4 +39,7 @@ return [
     whatwedo\CrudHistoryBundle\whatwedoCrudHistoryBundle::class => [
         'all' => true,
     ],
+    whatwedo\TwigBootstrapIcons\whatwedoTwigBootstrapIconsBundle::class => [
+        'all' => true,
+    ],
 ];

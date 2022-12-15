@@ -9,6 +9,7 @@ use DH\Auditor\Provider\Doctrine\Persistence\Reader\Filter\SimpleFilter;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Query;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use Doctrine\Common\Util\ClassUtils;
+use Exception;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use whatwedo\CrudBundle\Manager\DefinitionManager;
 use whatwedo\CrudHistoryBundle\Definition\BaseHistoryDefinition;
@@ -31,6 +32,9 @@ class HistoryManager
         $this->definitionManager = $definitionManager;
     }
 
+    /**
+     * @throws Exception
+     */
     public function getHistory($entity, int $page = 1): array
     {
         $definition = $this->getHistoryDefinition($entity);
@@ -40,7 +44,7 @@ class HistoryManager
         }
 
         if (! $this->auditReader->getProvider()->isAuditable($entity)) {
-            throw $this->createNotFoundException();
+            throw new \Exception('Entity ('.ClassUtils::getClass($entity).') not auditable.');
         }
 
         $transActionEntries = [];
@@ -116,9 +120,6 @@ class HistoryManager
         return $transActionEntries;
     }
 
-    /**
-     * @param $entity
-     */
     private function getTransActionEntries(HistoryDefinitionInterface $definition, $entity): array
     {
         /** @var array<Entry> $entries */
