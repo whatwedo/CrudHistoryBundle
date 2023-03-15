@@ -16,7 +16,7 @@ class AuditSubscriber implements EventSubscriberInterface
     ) {
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             CrudEvent::PRE_EDIT_PREFIX => [
