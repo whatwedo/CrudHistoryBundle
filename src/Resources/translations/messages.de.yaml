@@ -6,3 +6,7 @@ whatwedo_crud_history.type.dissociate: dissoziiert
 whatwedo_crud_history.changed: geändert von %old% zu %new%
 whatwedo_crud_history.assigned: zugewiesen
 whatwedo_crud_history.deleted: gelöscht
+whatwedo_crud_history.title: Änderungshistorie
+whatwedo_crud_history.breadcrumb: Änderungen
+whatwedo_crud_history.back: Zurück zu %name%
+

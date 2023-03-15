@@ -1,7 +1,24 @@
 {% extends 'base.html.twig' %}
 {# @var entry \DH\Auditor\Model\Entry #}
 
+{% block topbar %}
+    <nav class="whatwedo_crud-topbar flex-grow-0 flex-auto px-4 py-4 min-h-[71px] flex justify-end lg:justify-between">
+        {% block breadcrumbs %}
+            {% include "@whatwedoCrud/includes/topbar/_breadcrumbs.html.twig" %}
+        {% endblock %}
+
+        {% block actions %}
+        <div class="hidden md:flex lg:ml-3 flex space-x-3 justify-end flex-nowrap items-stretch">
+            <a href="{{ wwd_crud_entity_path(entity, constant('whatwedo\\CrudBundle\\Enum\\Page::SHOW')) }}" class="whatwedo-crud-button--action" role="menuitem" tabindex="-1">
+                <span class="2xl:block">{{ 'whatwedo_crud_history.back'|trans({'%name%': entityTitle|trans }) }}</span>
+            </a>
+        </div>
+        {% endblock %}
+    </nav>
+{% endblock %}
+
 {% block main %}
+    <h1 class="mb-6 whatwedo-utility-heading-1">{{ 'whatwedo_crud_history.title' | trans }}</h1>
     {% if transactionList|length > 0 %}
         <div class="bg-white shadow overflow-hidden sm:rounded-md">
             <ul role="list" class="divide-y divide-gray-200">
@@ -15,10 +32,10 @@
 
                                     <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
                                         <div>
-                                            <p class="text-sm font-medium text-indigo-600 truncate">
+                                            <p class="text-sm font-medium text-primary-500 truncate">
                                                 {{ entry.username }}
                                                 <span class="text-sm text-gray-900">
-                                                    <time datetime="{{ firstHistoryItem.date|date('Y-m-d H:i:s') }}">{{ firstHistoryItem.date|format_datetime('short', 'short') }}</time>
+                                                    <time datetime="{{ firstHistoryItem.date|date('Y-m-d H:i:s') }}">{{ firstHistoryItem.date|date('d.m.Y H:i') }}</time>
                                                 </span>
                                             </p>
                                         </div>
@@ -27,13 +44,13 @@
                                                 <p class="mt-2 flex items-center text-sm text-gray-500">
                                                     {% for audit in transaction %}
                                                         {% if audit.entry.type == 'insert' %}
-                                                            {{ bootstrap_icon('arrow-down-circle') }}
-                                                        {% elseif audit.entry.type == 'update' %}
-                                                            {{ bootstrap_icon('arrow-up-circle') }}
-                                                        {% elseif audit.entry.type == 'remove' %}
-                                                            {{ bootstrap_icon('x-circle-fill') }}
-                                                        {% elseif audit.entry.type == 'associate' %}
                                                             {{ bootstrap_icon('plus-circle') }}
+                                                        {% elseif audit.entry.type == 'update' %}
+                                                            {{ bootstrap_icon('pencil-square') }}
+                                                        {% elseif audit.entry.type == 'remove' %}
+                                                            {{ bootstrap_icon('x-circle') }}
+                                                        {% elseif audit.entry.type == 'associate' %}
+                                                            {{ bootstrap_icon('link-45deg') }}
                                                         {% elseif audit.entry.type == 'dissociate' %}
                                                             {{ bootstrap_icon('dash-circle-fill') }}
                                                         {% endif %}
@@ -65,9 +82,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div>
-                                    >
                                 </div>
                             </div>
                         </div>
