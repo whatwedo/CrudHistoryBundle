@@ -29,7 +29,8 @@ install:
 ecs:
 	vendor/bin/ecs --fix
 
-phpunit: ## PHP Unit
-	vendor/bin/simple-phpunit
+## PHP Unit
+phpunit:
+	vendor/bin/phpunit
 
 

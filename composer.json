@@ -12,24 +12,26 @@
     ],
     "require": {
         "php":                      ">=8.1",
+        "symfony/security-bundle": "^6.0",
+        "damienharper/auditor-bundle": "^5.2.1",
+        "symfony/form": "^6.0",
+        "whatwedo/twig-bootstrap-icons": "^v1.1.1",
         "whatwedo/table-bundle": "^1.0.0",
         "whatwedo/core-bundle": "^1.0.0",
         "whatwedo/crud-bundle": "^1.0.0",
-        "whatwedo/search-bundle": "dev-3.0-dev",
-        "damienharper/auditor": "dev-master as 1.3.1",
-        "damienharper/auditor-bundle": "dev-master",
-        "symfony/security-bundle": "^6.0"
-
+        "whatwedo/search-bundle": "^3.0.0"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^v6.0",
-        "zenstruck/foundry": "1.x-dev",
+        "zenstruck/foundry": "^v1.24.1",
         "symfony/yaml": "^v6.0",
         "whatwedo/php-coding-standard": "dev-develop",
-        "symfony/test-pack": "dev-main",
+        "symfony/test-pack": "^1.0.10",
         "whatwedo/table-bundle": "dev-1.0-dev as 1.0.0",
         "whatwedo/core-bundle": "dev-1.0-dev as 1.0.0",
-        "whatwedo/crud-bundle": "dev-1.0-dev as 1.0.0"
+        "whatwedo/crud-bundle": "dev-1.0-dev as 1.0.0",
+        "whatwedo/search-bundle": "dev-3.0-dev as 3.0.0",
+        "mhujer/breadcrumbs-bundle": "dev-master"
     },
     "autoload": {
         "psr-4": {
@@ -37,20 +39,6 @@
             "whatwedo\\CrudHistoryBundle\\Tests\\": "tests/"
         }
     },
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "twbs/icons",
-                "version": "1.6.1",
-                "source": {
-                    "url": "https://github.com/twbs/icons",
-                    "type": "git",
-                    "reference": "tags/v1.6.1"
-                }
-            }
-        }
-    ],
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true

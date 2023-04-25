@@ -66,9 +66,6 @@ final class AuditTriggerSubscriber implements EventSubscriberInterface
         return;
     }
 
-    /**
-     * @param $eventArgs
-     */
     private function triggerManyToOneAssciations(LifecycleEventArgs $eventArgs): void
     {
         if ($eventArgs->getEntity() instanceof AuditManyToOneTriggerInterface) {
