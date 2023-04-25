@@ -42,4 +42,7 @@ return [
     whatwedo\TwigBootstrapIcons\whatwedoTwigBootstrapIconsBundle::class => [
         'all' => true,
     ],
+    WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle::class => [
+        'all' => true,
+    ],
 ];

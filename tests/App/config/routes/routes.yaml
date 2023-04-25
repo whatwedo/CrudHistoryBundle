@@ -2,6 +2,9 @@ dh_auditor:
   resource: "@DHAuditorBundle/Controller/"
   type: auditor
 
+whatwedo_crud_bundle:
+  resource: "@whatwedoCrudBundle/Resources/config/routing.yml"
+  prefix: /
 
 whatwedo_crud_history_bundle:
   resource: "@whatwedoCrudHistoryBundle/Resources/config/routing.yml"

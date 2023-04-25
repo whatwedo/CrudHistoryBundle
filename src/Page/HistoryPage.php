@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace whatwedo\CrudHistoryBundle\Page;
 
-use whatwedo\CrudBundle\Enum\PageInterface;
+use whatwedo\CrudBundle\Enums\PageInterface;
 
 enum HistoryPage: string implements PageInterface
 {

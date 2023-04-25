@@ -7,7 +7,7 @@ namespace whatwedo\CrudHistoryBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use whatwedo\CrudBundle\Controller\CrudController;
-use whatwedo\CrudBundle\Enum\Page;
+use whatwedo\CrudBundle\Enums\Page;
 use whatwedo\CrudBundle\Manager\DefinitionManager;
 use whatwedo\CrudHistoryBundle\Manager\HistoryManager;
 use whatwedo\CrudHistoryBundle\Page\HistoryPage;

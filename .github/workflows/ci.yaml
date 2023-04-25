@@ -1,4 +1,4 @@
-name: searchBundle
+name: CrudHistoryBundle
 
 on:
   push:

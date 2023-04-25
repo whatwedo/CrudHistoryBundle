@@ -9,7 +9,7 @@
 
         {% block actions %}
         <div class="hidden md:flex lg:ml-3 flex space-x-3 justify-end flex-nowrap items-stretch">
-            <a href="{{ wwd_crud_entity_path(entity, constant('whatwedo\\CrudBundle\\Enum\\Page::SHOW')) }}" class="whatwedo-crud-button--action" role="menuitem" tabindex="-1">
+            <a href="{{ wwd_crud_entity_path(entity, constant('whatwedo\\CrudBundle\\Enums\\Page::SHOW')) }}" class="whatwedo-crud-button--action" role="menuitem" tabindex="-1">
                 <span class="2xl:block">{{ 'whatwedo_crud_history.back'|trans({'%name%': entityTitle|trans }) }}</span>
             </a>
         </div>
