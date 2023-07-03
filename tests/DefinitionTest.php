@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace whatwedo\CrudHistoryBundle\Tests;
 
+use araise\CrudBundle\Definition\DefinitionInterface;
+use araise\CrudBundle\Manager\DefinitionManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use whatwedo\CrudBundle\Definition\DefinitionInterface;
-use whatwedo\CrudBundle\Manager\DefinitionManager;
 use whatwedo\CrudHistoryBundle\Definition\BaseHistoryDefinition;
 use whatwedo\CrudHistoryBundle\Definition\HasHistoryDefinition;
 use whatwedo\CrudHistoryBundle\Manager\HistoryManager;

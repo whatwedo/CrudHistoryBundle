@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace whatwedo\CrudHistoryBundle\Controller;
 
+use araise\CrudBundle\Controller\CrudController;
+use araise\CrudBundle\Enums\Page;
+use araise\CrudBundle\Manager\DefinitionManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use whatwedo\CrudBundle\Controller\CrudController;
-use whatwedo\CrudBundle\Enums\Page;
-use whatwedo\CrudBundle\Manager\DefinitionManager;
 use whatwedo\CrudHistoryBundle\Manager\HistoryManager;
 use whatwedo\CrudHistoryBundle\Page\HistoryPage;
 

@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace whatwedo\CrudHistoryBundle\Manager;
 
+use araise\CrudBundle\Manager\DefinitionManager;
 use DH\Auditor\Model\Entry;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Filter\SimpleFilter;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Query;
 use DH\Auditor\Provider\Doctrine\Persistence\Reader\Reader;
 use Doctrine\Common\Util\ClassUtils;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use whatwedo\CrudBundle\Manager\DefinitionManager;
 use whatwedo\CrudHistoryBundle\Definition\BaseHistoryDefinition;
 use whatwedo\CrudHistoryBundle\Definition\HasHistoryDefinition;
 use whatwedo\CrudHistoryBundle\Definition\HistoryDefinitionInterface;
