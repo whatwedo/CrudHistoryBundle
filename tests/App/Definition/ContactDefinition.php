@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace whatwedo\CrudHistoryBundle\Tests\App\Definition;
 
-use whatwedo\CrudBundle\Builder\DefinitionBuilder;
-use whatwedo\CrudBundle\Definition\AbstractDefinition;
+use araise\CrudBundle\Builder\DefinitionBuilder;
+use araise\CrudBundle\Definition\AbstractDefinition;
+use araise\TableBundle\Table\Table;
 use whatwedo\CrudHistoryBundle\Tests\App\Entity\Contact;
-use whatwedo\TableBundle\Table\Table;
 
 class ContactDefinition extends AbstractDefinition
 {

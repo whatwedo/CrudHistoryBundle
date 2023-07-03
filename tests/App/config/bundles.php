@@ -24,16 +24,16 @@ return [
     Zenstruck\Foundry\ZenstruckFoundryBundle::class => [
         'all' => true,
     ],
-    whatwedo\CoreBundle\whatwedoCoreBundle::class => [
+    araise\CoreBundle\araiseCoreBundle::class => [
         'all' => true,
     ],
-    whatwedo\CrudBundle\whatwedoCrudBundle::class => [
+    araise\CrudBundle\araiseCrudBundle::class => [
         'all' => true,
     ],
-    whatwedo\SearchBundle\whatwedoSearchBundle::class => [
+    araise\SearchBundle\araiseSearchBundle::class => [
         'all' => true,
     ],
-    whatwedo\TableBundle\whatwedoTableBundle::class => [
+    araise\TableBundle\araiseTableBundle::class => [
         'all' => true,
     ],
     whatwedo\CrudHistoryBundle\whatwedoCrudHistoryBundle::class => [

@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Extends whatwedo crud bundle with history view from auditor-bundle",
     "license": "MIT",
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "authors": [
         {
             "name": "whatwedo GmbH",
@@ -16,10 +16,10 @@
         "damienharper/auditor-bundle": "^5.2.1",
         "symfony/form": "^6.0",
         "whatwedo/twig-bootstrap-icons": "^v1.1.1",
-        "whatwedo/table-bundle": "^1.0.0",
-        "whatwedo/core-bundle": "^1.0.0",
-        "whatwedo/crud-bundle": "^1.0.0",
-        "whatwedo/search-bundle": "^3.0.0"
+        "araise/table-bundle": "^1.0.0",
+        "araise/core-bundle": "^1.0.0",
+        "araise/crud-bundle": "^1.0.0",
+        "araise/search-bundle": "^3.0.0"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^v6.0",
@@ -27,10 +27,6 @@
         "symfony/yaml": "^v6.0",
         "whatwedo/php-coding-standard": "dev-develop",
         "symfony/test-pack": "^1.0.10",
-        "whatwedo/table-bundle": "dev-1.0-dev as 1.0.0",
-        "whatwedo/core-bundle": "dev-1.0-dev as 1.0.0",
-        "whatwedo/crud-bundle": "dev-1.0-dev as 1.0.0",
-        "whatwedo/search-bundle": "dev-3.0-dev as 3.0.0",
         "mhujer/breadcrumbs-bundle": "dev-master"
     },
     "autoload": {
