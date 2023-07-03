@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace whatwedo\CrudHistoryBundle\EventSubscriber;
 
+use araise\CrudBundle\Event\CrudEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use whatwedo\CrudBundle\Event\CrudEvent;
 use whatwedo\CrudHistoryBundle\Entity\AuditManyToOneTriggerInterface;
 
 class AuditSubscriber implements EventSubscriberInterface
