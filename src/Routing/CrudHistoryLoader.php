@@ -33,21 +33,21 @@ class CrudHistoryLoader extends Loader
             foreach ($definition::getCapabilities() as $capability) {
                 if (in_array($capability, HistoryPage::cases(), true)) {
                     $route = new Route(
-                        '/' . $definition::getRoutePathPrefix() . '/',
+                        '/'.$definition::getRoutePathPrefix().'/',
                         [
                             '_resource' => $resource,
-                            '_controller' => HistoryCrudController::class . '::' . $capability->toRoute(),
+                            '_controller' => HistoryCrudController::class.'::'.$capability->toRoute(),
                         ]
                     );
 
                     switch ($capability) {
                         case HistoryPage::HISTORY:
-                            $route->setPath($route->getPath() . '{id}/history');
+                            $route->setPath($route->getPath().'{id}/history');
                             $route->setRequirement('id', '\d+');
                             break;
                     }
 
-                    $routes->add($definition::getRoutePrefix() . '_' . $capability->toRoute(), $route);
+                    $routes->add($definition::getRoutePrefix().'_'.$capability->toRoute(), $route);
                 }
             }
         }

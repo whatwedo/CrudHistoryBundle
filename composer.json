@@ -27,7 +27,12 @@
         "symfony/yaml": "^v6.0",
         "whatwedo/php-coding-standard": "dev-develop",
         "symfony/test-pack": "^1.0.10",
-        "mhujer/breadcrumbs-bundle": "dev-master"
+        "mhujer/breadcrumbs-bundle": "dev-master",
+        "araise/table-bundle": "dev-develop as 1.0.0",
+        "araise/core-bundle": "dev-develop as 1.0.0",
+        "araise/crud-bundle": "dev-develop as 1.0.0",
+        "araise/search-bundle": "dev-develop as 3.0.0",
+        "phpstan/phpstan": "^1.10"
     },
     "autoload": {
         "psr-4": {
