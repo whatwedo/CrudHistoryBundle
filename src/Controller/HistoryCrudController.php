@@ -33,7 +33,7 @@ class HistoryCrudController extends CrudController
                 'wwd_crud_enable_breadcrumbs' => true,
                 'transactionList' => $transactionList,
                 'entity' => $entity,
-                'entityTitle' => $this->definition::getEntityTitle(),
+                'entityTitle' => (new \ReflectionMethod($this->definition, 'getEntityTitle'))->isStatic() ? $this->definition::getEntityTitle() : $this->definition->getEntityTitle(),
             ]
         );
     }

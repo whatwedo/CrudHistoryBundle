@@ -39,11 +39,11 @@ class HistoryManager
         $definition = $this->getHistoryDefinition($entity);
 
         if (ClassUtils::getClass($entity) !== $definition->getMainClass()) {
-            throw new \Exception(ClassUtils::getClass($entity) . ' not suitable for ' . static::class);
+            throw new \Exception(ClassUtils::getClass($entity).' not suitable for '.static::class);
         }
 
         if (! $this->auditReader->getProvider()->isAuditable($entity)) {
-            throw new \Exception('Entity (' . ClassUtils::getClass($entity) . ') not auditable.');
+            throw new \Exception('Entity ('.ClassUtils::getClass($entity).') not auditable.');
         }
 
         $transActionEntries = [];
