@@ -14,7 +14,7 @@ trait AuditTriggerTrait
     #[ORM\Column(type: 'integer')]
     private int $auditTrigger = 0;
 
-    public function triggerAudit()
+    public function triggerAudit(): void
     {
         ++$this->auditTrigger;
     }

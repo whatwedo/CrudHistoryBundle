@@ -65,9 +65,11 @@ class Contact implements \Stringable, AuditManyToOneTriggerInterface
         $this->company = $company;
     }
 
-    public function triggerManyToOne()
+    public function triggerManyToOne(): array
     {
         $this->getCompany()->triggerAudit();
+
+        return [$this->getCompany()];
     }
 
     public function __toString(): string
