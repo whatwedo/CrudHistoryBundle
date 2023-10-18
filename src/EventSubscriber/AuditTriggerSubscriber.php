@@ -31,45 +31,49 @@ namespace whatwedo\CrudHistoryBundle\EventSubscriber;
 
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;
 use whatwedo\CrudHistoryBundle\Entity\AuditManyToOneTriggerInterface;
 
 final class AuditTriggerSubscriber implements EventSubscriberInterface
 {
-    public function __construct(
-        protected EntityManagerInterface $entityManager
-    ) {
-    }
-
     public function getSubscribedEvents(): array
     {
         return [
-            Events::prePersist,
-            Events::preUpdate,
-            Events::postFlush,
+            Events::onFlush,
         ];
     }
 
-    public function preUpdate($entity): void
+    public function onFlush(OnFlushEventArgs $args): void
     {
-        $this->triggerManyToOneAssciations($entity);
+        $entityManager = $args->getObjectManager();
+        $unitOfWork = $entityManager->getUnitOfWork();
+
+        $updatedEntities = $unitOfWork->getScheduledEntityUpdates();
+        $insertedEntities = $unitOfWork->getScheduledEntityInsertions();
+
+        if (count($updatedEntities) > 0 || count($insertedEntities) > 0) {
+            $this->handleEntities($insertedEntities, $entityManager);
+            $this->handleEntities($updatedEntities, $entityManager);
+        }
     }
 
-    public function prePersist($entity): void
+    /**
+     * @param object[] $entities
+     */
+    private function handleEntities(array $entities, EntityManagerInterface $entityManager): void
     {
-        $this->triggerManyToOneAssciations($entity);
-    }
+        foreach ($entities as $entity) {
+            if ($entity instanceof AuditManyToOneTriggerInterface) {
+                $touchedEntities = $entity->triggerManyToOne();
 
-    public function postFlush($entity): void
-    {
-        return;
-    }
-
-    private function triggerManyToOneAssciations(LifecycleEventArgs $eventArgs): void
-    {
-        if ($eventArgs->getEntity() instanceof AuditManyToOneTriggerInterface) {
-            $eventArgs->getEntity()->triggerManyToOne();
+                foreach ($touchedEntities as $touchedEntity) {
+                    if ($touchedEntity === null) {
+                        continue;
+                    }
+                    $entityManager->getUnitOfWork()->recomputeSingleEntityChangeSet($entityManager->getClassMetadata(get_class($touchedEntity)), $touchedEntity);
+                }
+            }
         }
     }
 }
