@@ -29,7 +29,7 @@ class ControllerTest extends WebTestCase
         ]);
         $crawler = $client->request('GET', $url);
 
-        $this->assertResponseIsSuccessful();
+        self::assertResponseIsSuccessful();
 
         $this->assertnotSame('', $crawler->html());
     }
