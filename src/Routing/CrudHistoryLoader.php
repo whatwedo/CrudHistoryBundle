@@ -21,7 +21,7 @@ class CrudHistoryLoader extends Loader
         parent::__construct();
     }
 
-    public function load($resource, $type = null): RouteCollection
+    public function load(mixed $resource, ?string $type = null): RouteCollection
     {
         if ($this->isLoaded) {
             throw new \RuntimeException('Do not add the "whatwedo_crud" loader twice');
@@ -40,11 +40,9 @@ class CrudHistoryLoader extends Loader
                         ]
                     );
 
-                    switch ($capability) {
-                        case HistoryPage::HISTORY:
-                            $route->setPath($route->getPath().'{id}/history');
-                            $route->setRequirement('id', '\d+');
-                            break;
+                    if ($capability == HistoryPage::HISTORY) {
+                        $route->setPath($route->getPath().'{id}/history');
+                        $route->setRequirement('id', '\d+');
                     }
 
                     $routes->add($definition::getRoutePrefix().'_'.$capability->toRoute(), $route);
@@ -57,10 +55,7 @@ class CrudHistoryLoader extends Loader
         return $routes;
     }
 
-    /**
-     * @return bool
-     */
-    public function supports($resource, $type = null)
+    public function supports(mixed $resource, ?string $type = null): bool
     {
         return $type === 'whatwedo_crud_history';
     }
