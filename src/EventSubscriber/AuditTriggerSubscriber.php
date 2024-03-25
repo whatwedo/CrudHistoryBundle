@@ -29,21 +29,15 @@ declare(strict_types=1);
 
 namespace whatwedo\CrudHistoryBundle\EventSubscriber;
 
-use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;
 use whatwedo\CrudHistoryBundle\Entity\AuditManyToOneTriggerInterface;
 
-final class AuditTriggerSubscriber implements EventSubscriberInterface
+#[AsDoctrineListener(event: Events::onFlush)]
+final class AuditTriggerSubscriber
 {
-    public function getSubscribedEvents(): array
-    {
-        return [
-            Events::onFlush,
-        ];
-    }
-
     public function onFlush(OnFlushEventArgs $args): void
     {
         $entityManager = $args->getObjectManager();

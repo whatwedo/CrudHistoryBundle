@@ -6,58 +6,48 @@ namespace whatwedo\CrudHistoryBundle\Tests\App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use whatwedo\CrudHistoryBundle\Entity\AuditTriggerInterface;
 use whatwedo\CrudHistoryBundle\Entity\AuditTriggerTrait;
+use whatwedo\CrudHistoryBundle\Tests\App\Repository\CompanyRepository;
 
-/**
- * @ORM\Table(name="company")
- * @ORM\Entity(repositoryClass="whatwedo\CrudHistoryBundle\Tests\App\Repository\CompanyRepository")
- */
+#[ORM\Table(name: 'company')]
+#[ORM\Entity(repositoryClass: CompanyRepository::class)]
 class Company implements AuditTriggerInterface
 {
     use AuditTriggerTrait;
 
-    /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+    #[ORM\Column(type: Types::INTEGER)]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank
-     * @Assert\NotNull()
-     */
+    #[ORM\Column(type: Types::STRING)]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?string $name = null;
 
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank
-     * @Assert\NotNull()
-     */
+    #[ORM\Column(type: Types::STRING)]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?string $city = null;
 
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank
-     * @Assert\NotNull()
-     */
+    #[ORM\Column(type: Types::STRING)]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?string $country = null;
 
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank
-     * @Assert\NotNull()
-     */
+    #[ORM\Column(type: Types::STRING)]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?string $taxIdentificationNumber = null;
 
     /**
      * @var Collection|array<Contact> One Member has Many Departments
-     * @ORM\OneToMany (targetEntity="Contact", mappedBy="company")
      */
+    #[ORM\OneToMany(mappedBy: 'company', targetEntity: Contact::class)]
     private $contacts;
 
     public function __construct()

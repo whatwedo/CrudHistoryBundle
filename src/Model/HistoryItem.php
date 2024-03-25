@@ -19,7 +19,7 @@ class HistoryItem
     {
         $this->entry = $entry;
         $this->class = ClassUtils::getRealClass($entityFqcn);
-        $this->date = new \DateTimeImmutable($entry->getCreatedAt());
+        $this->date = is_string($entry->getCreatedAt()) ? new \DateTimeImmutable($entry->getCreatedAt()) : $entry->getCreatedAt();
     }
 
     public function getEntry(): Entry
